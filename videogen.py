@@ -11,7 +11,12 @@ def generate_word_video(words, word_duration, beep_duration, output_filename, be
 
     # Correct reference to AudioFileClip
     beep = moviepy.audio.io.AudioFileClip.AudioFileClip(beep_path)
-
+    
+    plus_clip = moviepy.video.VideoClip.TextClip(
+                    text="+", font_size=100, color='white', size=video_size, method='label', duration=beep_duration, text_align='center', font="C:\\Windows\\Fonts\\arial.ttf"
+                ).with_audio(beep)
+    clips.append(plus_clip)
+    
     for i, word in enumerate(words):
         # Word display
         word_clip = moviepy.video.VideoClip.TextClip(
@@ -21,9 +26,7 @@ def generate_word_video(words, word_duration, beep_duration, output_filename, be
 
         # Beep and plus display
         
-    plus_clip = moviepy.video.VideoClip.TextClip(
-                text="+", font_size=100, color='white', size=video_size, method='label', duration=beep_duration, text_align='center', font="C:\\Windows\\Fonts\\arial.ttf"
-            ).with_audio(beep)
+    
     
     # Combine all clips
     final = moviepy.video.compositing.CompositeVideoClip.concatenate_videoclips(clips=clips, bg_color=bg_color, transition=plus_clip, method='compose')
@@ -44,6 +47,3 @@ generate_word_video(
     output_filename=filename,
     beep_path=beep
 )
-
-
-#"BEBÉ", "CASA", "CRECER", "FUMAR", "GUSANO", "RELOJ", "HUEVO", "SENTARSE", "SHAMPOO", "GATO", "MESA", "NACER", "BEBER", "DIBUJAR", "MANZANA", "COMER", "CAMA", "POLICÍA", "LLUVIA", "VER", "COCINAR", "BALLENA", "SERPIENTE", "LIMÓN", "PEINARSE", "REÍR", "POLLO", "LEER", "FUEGO", "DÍA", "PAN", "RUBORIZARSE", "NIÑO", "ENFERMO", "PENSAR"
